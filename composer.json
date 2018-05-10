@@ -1,0 +1,25 @@
+{
+    "name": "tmarquesini/sed-data",
+    "description": "Biblioteca para obter dados de escolas, turmas e alunos no sistema SED, da Secretaria da Educação do Estado de São Paulo.",
+    "type": "library",
+    "require": {
+        "php": "^7.0",
+        "doctrine/collections": "^1.5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "psy/psysh": "@stable"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thiago Marquesini",
+            "email": "contato@marquesini.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SedData\\": "src/"
+        }
+    }
+}
