@@ -6,12 +6,25 @@ namespace SedData;
  * Class Sed
  * @package SedData
  */
+
+use SedData\Repository\SchoolsRepository;
+
 /**
  * Class Sed
  * @package SedData
  */
-class Sed extends Http
+class Sed
 {
+    /**
+     * @var Http
+     */
+    protected $http;
+
+    /**
+     * @var SchoolsRepository
+     */
+    public $schools;
+
     /**
      * Sed constructor.
      * @param string $user
@@ -20,7 +33,7 @@ class Sed extends Http
      */
     public function __construct(string $user, string $password)
     {
-        parent::__construct();
+        $this->http = new Http();
 
         $credentials = [
             'usuario' => $user,
@@ -28,6 +41,8 @@ class Sed extends Http
         ];
 
         $this->login($credentials);
+
+        $this->loadRepositories();
     }
 
     /**
@@ -36,8 +51,6 @@ class Sed extends Http
     public function __destruct()
     {
         $this->logout();
-
-        parent::__destruct();
     }
 
     /**
@@ -46,14 +59,14 @@ class Sed extends Http
      */
     protected function login(array $credentials)
     {
-        $response = $this->post('Logon/LogOn', $credentials);
+        $response = $this->http->post('Logon/LogOn', $credentials);
 
-        if ((string) $response->getBody() == '{"retorno":"invalido"}') {
+        if ((string)$response->getBody() == '{"retorno":"invalido"}') {
             throw new \Exception('Credenciais inválidas');
         }
 
         // Seleciona o perfil de secretaria
-        $this->post('Inicio/AlterarPerfil', ['id' => 1234]);
+        $this->http->post('Inicio/AlterarPerfil', ['id' => 1234]);
     }
 
     /**
@@ -61,6 +74,14 @@ class Sed extends Http
      */
     protected function logout()
     {
-        $this->get('Logon/LogOff');
+        $this->http->get('Logon/LogOff');
+    }
+
+    /**
+     *
+     */
+    protected function loadRepositories()
+    {
+        $this->schools = new SchoolsRepository($this->http);
     }
 }
