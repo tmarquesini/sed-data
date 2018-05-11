@@ -7,6 +7,7 @@ namespace SedData;
  * @package SedData
  */
 
+use SedData\Repository\GradesRepository;
 use SedData\Repository\SchoolsRepository;
 
 /**
@@ -24,6 +25,11 @@ class Sed
      * @var SchoolsRepository
      */
     public $schools;
+
+    /**
+     * @var
+     */
+    public $grades;
 
     /**
      * Sed constructor.
@@ -83,5 +89,6 @@ class Sed
     protected function loadRepositories()
     {
         $this->schools = new SchoolsRepository($this->http);
+        $this->grades = new GradesRepository($this->http);
     }
 }
