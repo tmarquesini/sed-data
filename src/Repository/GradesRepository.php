@@ -26,7 +26,7 @@ class GradesRepository extends BaseRepository
         foreach ($data as $grade) {
             $grades->add(
                 new Grade(
-                    $grade->children(15)->text(),
+                    $this->extractCode($grade->children(0)->text()),
                     $grade->children(1)->text(),
                     $grade->children(4)->text(),
                     $grade->children(5)->text(),
@@ -69,14 +69,23 @@ class GradesRepository extends BaseRepository
         $data = [
             'anoLetivo' => date('Y'),
             'codigoEscola' => $school->getCode(),
-            'codigoSerie' => 0,
-            'codigoTurma' => 0,
-            'numeroClasse' => null,
             'tipoPesquisa' => 1
         ];
 
         $url = 'NCA/RelacaoAlunosClasse/PesquisaTurma';
 
         return $this->http->post($url, $data);
+    }
+
+    /**
+     * @param string $html
+     * @return mixed
+     */
+    public function extractCode(string $html)
+    {
+        $re = '/Visualizar\(\d+, \d+, (\d+)\)/m';
+        preg_match($re, $html, $result);
+
+        return $result[1];
     }
 }
