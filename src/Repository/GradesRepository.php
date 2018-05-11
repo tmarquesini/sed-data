@@ -26,10 +26,10 @@ class GradesRepository extends BaseRepository
         foreach ($data as $grade) {
             $grades->add(
                 new Grade(
-                    $this->extractCode($grade->children(0)->text()),
+                    $this->extractCode($grade->children(0)->children(0)->onclick),
                     $grade->children(1)->text(),
-                    $grade->children(4)->text(),
-                    $grade->children(5)->text(),
+                    html_entity_decode($grade->children(4)->text()),
+                    html_entity_decode($grade->children(5)->text()),
                     $grade->children(9)->text(),
                     $grade->children(10)->text(),
                     $grade->children(11)->text(),
@@ -79,13 +79,17 @@ class GradesRepository extends BaseRepository
 
     /**
      * @param string $html
-     * @return mixed
+     * @return bool
      */
     public function extractCode(string $html)
     {
         $re = '/Visualizar\(\d+, \d+, (\d+)\)/m';
         preg_match($re, $html, $result);
 
-        return $result[1];
+        if ($result != false) {
+            return $result[1];
+        }
+
+        return false;
     }
 }
