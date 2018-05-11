@@ -9,7 +9,6 @@
         "sunra/php-simple-html-dom-parser": "1.5.2"
     },
     "require-dev": {
-        "psy/psysh": "@stable"
     },
     "license": "MIT",
     "authors": [
