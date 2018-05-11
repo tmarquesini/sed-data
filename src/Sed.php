@@ -66,7 +66,7 @@ class Sed
         }
 
         // Seleciona o perfil de secretaria
-        $this->http->post('Inicio/AlterarPerfil', ['id' => 1234]);
+        $this->http->post('Inicio/AlterarPerfil', ['id' => 1255]);
     }
 
     /**
