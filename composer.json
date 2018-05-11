@@ -5,7 +5,8 @@
     "require": {
         "php": "^7.0",
         "doctrine/collections": "^1.5",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "sunra/php-simple-html-dom-parser": "1.5.2"
     },
     "require-dev": {
         "psy/psysh": "@stable"
