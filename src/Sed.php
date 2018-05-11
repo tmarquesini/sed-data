@@ -7,8 +7,11 @@ namespace SedData;
  * @package SedData
  */
 
+use SedData\Entity\Grade;
+use SedData\Entity\School;
 use SedData\Repository\GradesRepository;
 use SedData\Repository\SchoolsRepository;
+use SedData\Repository\StudentsRepository;
 
 /**
  * Class Sed
@@ -30,6 +33,11 @@ class Sed
      * @var
      */
     public $grades;
+
+    /**
+     * @var
+     */
+    public $students;
 
     /**
      * Sed constructor.
@@ -71,7 +79,7 @@ class Sed
             throw new \Exception('Credenciais inválidas');
         }
 
-        // Seleciona o perfil de secretaria
+        // Seleciona o perfil de prefeituera
         $this->http->post('Inicio/AlterarPerfil', ['id' => 1255]);
     }
 
@@ -90,5 +98,6 @@ class Sed
     {
         $this->schools = new SchoolsRepository($this->http);
         $this->grades = new GradesRepository($this->http);
+        $this->students = new StudentsRepository($this->http);
     }
 }
