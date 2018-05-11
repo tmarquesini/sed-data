@@ -67,8 +67,8 @@ class SchoolsRepository extends BaseRepository
      */
     protected function extractSchoolName(string $text)
     {
-        $nameStartPosition = strpos($text, ' - ') + 3;
+        $startNamePosition = strpos($text, ' - ') + 3;
 
-        return substr($text, $nameStartPosition);
+        return substr($text, $startNamePosition);
     }
 }
