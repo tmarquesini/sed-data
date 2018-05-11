@@ -37,6 +37,18 @@ class SchoolsRepository extends BaseRepository
      */
     protected function getData()
     {
+        $response = $this->getPage();
+
+        $data = json_decode((string) $response->getBody());
+
+        return $data;
+    }
+
+    /**
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    protected function getPage()
+    {
         $data = [
             'diretoria' => 24536,
             'municipio' => 9501,
@@ -46,9 +58,7 @@ class SchoolsRepository extends BaseRepository
 
         $url = 'nca/RelacaoAlunosClasse/DropDownEscolasCIEJson' . '?' . http_build_query($data);
 
-        $response = $this->http->get($url);
-
-        return json_decode((string) $response->getBody());
+        return $this->http->get($url);
     }
 
     /**
