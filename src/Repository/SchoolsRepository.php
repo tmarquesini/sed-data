@@ -22,7 +22,7 @@ class SchoolsRepository extends BaseRepository
 
         foreach($data as $school) {
             $code = $school->Value;
-            $name = $this->extractSchoolName($school->Text);
+            $name = $school->Text;
 
             $schools->add(
                 new School($code, $name)
@@ -59,16 +59,5 @@ class SchoolsRepository extends BaseRepository
         $url = 'nca/RelacaoAlunosClasse/DropDownEscolasCIEJson' . '?' . http_build_query($data);
 
         return $this->http->get($url);
-    }
-
-    /**
-     * @param string $text
-     * @return bool|string
-     */
-    protected function extractSchoolName(string $text)
-    {
-        $startNamePosition = strpos($text, ' - ') + 3;
-
-        return substr($text, $startNamePosition);
     }
 }
