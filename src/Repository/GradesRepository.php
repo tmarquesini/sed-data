@@ -69,7 +69,8 @@ class GradesRepository extends BaseRepository
         $data = [
             'anoLetivo' => date('Y'),
             'codigoEscola' => $school->getCode(),
-            'tipoPesquisa' => 1
+            'numeroClasse' => '',
+            'tipoPesquisa' => 1,
         ];
 
         $url = 'NCA/RelacaoAlunosClasse/PesquisaTurma';
